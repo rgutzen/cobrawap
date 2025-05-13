@@ -20,7 +20,7 @@ use rule template_all as all with:
 
 use rule check_input as check_data_entry with:
     input:
-        data = Path('{dir}') / '{data_name}' / f'{{data_name}}.{config.NEO_FORMAT}',
+        data = Path('{dir}') / '{data_name}' / '{data_name}' f'.{config.NEO_FORMAT}',
         script = SCRIPTS / 'check_input.py'
     output:
         Path('{dir}') / '{data_name}.check'
@@ -28,14 +28,14 @@ use rule check_input as check_data_entry with:
 
 use rule template as plot_traces with:
     input:
-        data = Path('{dir}') / '{data_name}' / f'{{data_name}}.{config.NEO_FORMAT}',
+        data = Path('{dir}') / '{data_name}' / '{data_name}' f'.{config.NEO_FORMAT}',
         script = SCRIPTS / 'plot_traces.py'
     params:
         params(t_start = config.PLOT_TSTART,
                t_stop = config.PLOT_TSTOP,
                channels = config.PLOT_CHANNELS)
     output:
-        img = Path('{dir}') / '{data_name}' / f'trace_{{data_name}}.{config.PLOT_FORMAT}'
+        img = Path('{dir}') / '{data_name}' / 'trace_{data_name}' f'.{config.PLOT_FORMAT}'
 
 
 def curation_script(w):
@@ -62,4 +62,4 @@ use rule template as enter_data with:
                'orientation_top', 'orientation_right', 'annotations',
                'array_annotations', 'kwargs', 'trial', config=config)
     output:
-        Path('{dir}') / '{data_name}' / f'{{data_name}}.{config.NEO_FORMAT}'
+        Path('{dir}') / '{data_name}' / '{data_name}' f'.{config.NEO_FORMAT}'

@@ -121,17 +121,17 @@ use rule template as plot_waves with:
 
 use rule template as time_slice with:
     input:
-        data = Path('{dir}') / f'{{data_name}}.{config.NEO_FORMAT}',
+        data = Path('{dir}') / '{data_name}' f'.{config.NEO_FORMAT}',
         script = SCRIPTS / 'time_slice.py'
     params:
         params()
     output:
-        Path('{dir}') / f'{{data_name}}_{{t_start, [0-9]+}}-{{t_stop, [0-9]+}}s.{config.NEO_FORMAT}'
+        Path('{dir}') / '{data_name}_{t_start, [0-9]+}-{t_stop, [0-9]+}s' f'.{config.NEO_FORMAT}'
  
 
 use rule template as plot_movie_frames with:
     input:
-        data = Path('{dir}') / f'{{data_name}}.{config.NEO_FORMAT}',
+        data = Path('{dir}') / '{data_name}' f'.{config.NEO_FORMAT}',
         script = SCRIPTS / 'plot_movie_frames.py'
     params:
         params('colormap', 'frame_rate', 'marker_color', 'plot_event',

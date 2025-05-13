@@ -70,7 +70,7 @@ use rule template as background_subtraction with:
     params:
         params()
     output:
-        Path('{dir}') / 'background_subtraction' / f'{{rule_name}}.{config.NEO_FORMAT}',
+        Path('{dir}') / 'background_subtraction' / '{rule_name}' f'.{config.NEO_FORMAT}',
         output_img = Path('{dir}') / '{rule_name}' / f'background.{config.PLOT_FORMAT}',
         output_array = Path('{dir}') / '{rule_name}' / 'background.npy'
 
@@ -95,7 +95,7 @@ use rule template as normalization with:
     params:
         params('normalize_by', config=config)
     output:
-        Path('{dir}') / 'normalization' / f'{{rule_name}}.{config.NEO_FORMAT}'
+        Path('{dir}') / 'normalization' / '{rule_name}' f'.{config.NEO_FORMAT}'
 
 
 use rule template as detrending with:

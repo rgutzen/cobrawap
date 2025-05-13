@@ -48,9 +48,9 @@ use rule template as compute_measure with:
     params:
         params(config.__dict__)
     output:
-        Path('{dir}') / '{measure}' / f'{config.EVENT_NAME}_{{measure}}.csv',
+        Path('{dir}') / '{measure}' / f'{config.EVENT_NAME}_' '{measure}.csv',
         output_img = Path('{dir}') / '{measure}' 
-                      / f'{config.EVENT_NAME}_{{measure}}.{config.PLOT_FORMAT}'
+                      / f'{config.EVENT_NAME}_' '{measure}' f'.{config.PLOT_FORMAT}'
 
 
 use rule compute_measure as spatial_derivative with:
